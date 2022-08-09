@@ -23,15 +23,13 @@ Būtina atlikti visus veiksmus ir laikytis veiksmų eiliškumo.
 1. išjungti priežiūros režimą ('maintainance mode'), kad naudotojai galėtų prisijungti ir naudotis sistema.
 
 # Žodynas
-Čia ir toliau naudosime tokius terminus ir pavyzdine direktorijas:
+Čia ir toliau naudosime tokius terminus ir pavyzdines direktorijas:
 * pagrindinis katalogas - tarkime  `/home/jurgitosmoodle/`
 * moodle katalogas - tarkime `/home/jurgitosmoodle/public_html`
 * moodledata katalogas - tarkime `/home/jurgitosmoodle/moodledata`
 * moodle sistemos adresas - tarkime `https://manomoodle.lt`
 
 Galite nusikopijuoti šias instrukcijas ir pakeisti katalogus ir adresus savais.
-
-
 
 ## Prisijungti prie moodle sistemos `https://manomoodle.lt`
 
@@ -45,7 +43,7 @@ Jei laukelis `Papildomas prisijungimo URL` (`Alternative login URL`) yra ne tuš
 
 Eiti į **Pagrindinis / Administravimas / Serveris /Priežiūros režimas** ir įjungti priežiūros režimą - spausti `Įrašyti pakeitimus`
 
- ![NaujinimoDarbaiPranesimas](images/NaujinimoDarbaiPranesimas.png)
+![NaujinimoDarbaiPranesimas](images/NaujinimoDarbaiPranesimas.png)
 
 Dabar jokie kiti naudotojai, išskyrus jus, negali naudotis sistema. 
 
@@ -200,13 +198,18 @@ tai pervadins moodle katalogą į public_html.
 
 ## Sutvarkyti leidimus failams:
 
- chmod -R ug+rwX /home/moodle/moodle/
+ chmod -R ug+rwX /home/jurgitosmoodle/public_html/
 
-# Perkopijuoti temos katalogą ir config.php failą
+#  Perkopijuoti temos katalogą ir config.php failą
 
 ```
 cp -a public_html_old/config.php public_html
-cp -a -R public_html_old/themes/* public_html/themes
+```
+
+(optional)
+
+```
+ cp -a -R public_html_old/themes/* public_html/themes
 ```
 
 # Atlikti atnaujinimo veiksmus Moodle puslapyje.
@@ -219,38 +222,39 @@ Spausti Tęsti.
 
 Pamatysite
 
- ![DabartinioLeidimoInformacija](images/DabartinioLeidimoInformacija.png)
+![DabartinioLeidimoInformacija](images/DabartinioLeidimoInformacija.png)
 
 Spausti Tęsti
 
- ![testi](images/testi.png)
+[testi](images/testi.png)
 
 Gausite
 
- ![PapildiniuPatikra](images/PapildiniuPatikra.png)
+![PapildiniuPatikra](images/PapildiniuPatikra.png)
 
 Pasižymėti, kurių trūksta ir spausti Atnaujinti duomenu bazę dabar.
 
- ![Atnaujinta](images/atnaujinta.png)
- Spausti Tęsti
+![Atnaujinta](images/atnaujinta.png)
 
- ![testi](images/testi.png)
+Spausti Tęsti
+
+![testi](images/testi.png)
 
  Prisijungti:
 
-  ![MoodleLogin](images/MoodleLogin.png)
+![MoodleLogin](images/MoodleLogin.png)
 
-   Atlikite visus būtinus numatytųjų nustatymų pakeitimus ir spustelėkite mygtuką „Išsaugoti pakeitimus“ šio puslapio apačioje.
+ Atlikite visus būtinus numatytųjų nustatymų pakeitimus ir spustelėkite mygtuką „Išsaugoti pakeitimus“ šio puslapio apačioje.
 
- ![Nustatymai](images/Nustatymai.png)
+![Nustatymai](images/Nustatymai.png)
 
- Įrašyti e-mail:
+Įrašyti e-mail:
 
- ![Email](images/emai.png)
+![Email](images/emai.png)
 
- Spausti Tikrinti ar yra atnaujinimų:
+Spausti Tikrinti ar yra atnaujinimų:
 
-  ![YraPapildiniu](images/YraPapildiniu.png)
+![YraPapildiniu](images/YraPapildiniu.png)
 
 # Atnaujinti papildinius
 
