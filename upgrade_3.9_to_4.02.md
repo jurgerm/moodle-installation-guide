@@ -196,11 +196,15 @@ mv moodle public_html
 
 tai pervadins moodle katalogą į public_html.
 
-## Sutvarkyti leidimus failams:
+# Sutvarkyti leidimus failams
 
- chmod -R ug+rwX /home/jurgitosmoodle/public_html/
+Sutvarkyti leidimus failams, kad moodle useris ir sistema galėtų skaityti ir rašyti į visus failus.
 
-#  Perkopijuoti temos katalogą ir config.php failą
+```
+chmod -R ug+rwX ./public_html/
+```
+
+# Perkopijuoti temos katalogą ir config.php failą
 
 ```
 cp -a public_html_old/config.php public_html
@@ -211,6 +215,96 @@ cp -a public_html_old/config.php public_html
 ```
  cp -a -R public_html_old/themes/* public_html/themes
 ```
+
+# Saugumo sutvarkymas
+
+## sutvarkyti teises į config failą, kad praeitų saugumo patikrinimus
+
+```
+chmod ug-w ./public_html/config.php
+```
+
+## pašalinti nereikalingus failus
+
+Žemiau išvardinti failai yra Moodle sistemos veikimui yra nereikalingi (naudojami tik Moodle programavimui, arba yra informaciniai) ir juos (pagal saugumo rekomendacijas) galima pašalinti:
+
+```
+cd public_html
+
+[ -e .shifter.json ] && rm .shifter.json
+[ -e .stylelintrc ] && rm .stylelintrc
+[ -e security.txt ] && rm security.txt
+[ -e .eslintrc  ] && rm .eslintrc 
+[ -e .travis.yml ] && rm .travis.yml
+[ -e .gherkin-lintrc ] && rm .gherkin-lintrc
+[ -e CONTRIBUTING.txt ] && rm CONTRIBUTING.txt
+[ -e .gitattributes ] && rm .gitattributes
+[ -e COPYING.txt ] && rm COPYING.txt
+[ -e composer.json ] && rm composer.json
+[ -e .github ] && rm .github
+[ -e Gruntfile.js ] && rm Gruntfile.js
+[ -e behat.yml.dist  ] && rm behat.yml.dist 
+[ -e composer.lock ] && rm composer.lock
+[ -e install ] && rm install
+[ -e .grunt ] && rm .grunt
+[ -e INSTALL.txt ] && rm INSTALL.txt
+[ -e config-dist.php ] && rm config-dist.php
+[ -e install.php ] && rm install.php
+[ -e .jshintignore  ] && rm .jshintignore 
+[ -e PULL_REQUEST_TEMPLATE.txt ] && rm PULL_REQUEST_TEMPLATE.txt
+[ -e .jshintrc ] && rm .jshintrc
+[ -e README.txt ] && rm README.txt
+[ -e package.json ] && rm package.json
+[ -e .nvmrc   ] && rm .nvmrc  
+[ -e TRADEMARK.txt ] && rm TRADEMARK.txt       
+[ -e .phpcs.xml.dist ] && rm .phpcs.xml.dist       
+[ -e phpunit.xml.dist ] && rm phpunit.xml.dist
+
+cd ..
+```
+
+# Sutvarkyti .htaccess failą
+
+Šis failas naudojamas papildomiems apache2 nustatymams. 
+
+Jei senojoje Moodle versijoje jau yra failas `.htaccess`, reikia persikopijuoti jį iš senos į naują sistemą:
+```
+[ -e public_html_old/.htaccess ] && cp public_html_old/.htaccess public_html
+```
+
+Tada atsidaryti 
+
+```
+nano public_html
+```
+
+ir patikrinti, ar yra tokie nustatymai: 
+
+Failo pradžioje turi būti: 
+```
+RewriteEngine On
+```
+
+Žemiau turi būti (nebūtinai tokiu eiliškumu):
+```
+RewriteRule "(\/vendor\/)" - [F]
+RewriteRule "(\/node_modules\/)" - [F]
+RewriteRule "(^|/)\.(?!well-known\/)" - [F]
+RewriteRule "(composer\.json)" - [F]
+RewriteRule "(\.lock)" - [F]
+RewriteRule "(\/environment.xml)" - [F]
+# Options -Indexes
+RewriteRule "(\/install.xml)" - [F]
+RewriteRule "(\/README)" - [F]
+RewriteRule "(\/readme)" - [F]
+RewriteRule "(\/moodle_readme)" - [F]
+RewriteRule "(\/upgrade\.txt)" - [F]
+RewriteRule "(phpunit\.xml\.dist)" - [F]
+RewriteRule "(\/tests\/behat\/)" - [F]
+RewriteRule "(\/fixtures\/)" - [F]
+
+```
+
 
 # Atlikti atnaujinimo veiksmus Moodle puslapyje.
 
@@ -304,7 +398,6 @@ Jei laukelis `Papildomas prisijungimo URL` (`Alternative login URL`) buvo ne tu�
  ![IsjungtiNaujinimoDarbai](images/IsjungtiNaujinimoDarbai.png)
 
  Spausti Įrašyti keitimus.
-
 
 
 
